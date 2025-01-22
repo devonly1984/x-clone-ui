@@ -8,7 +8,7 @@ const LeftSidebar = () => {
     <div className="h-screen sticky top-0 flex flex-col justify-between pt-2 pb-8">
       <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
         <Link href="/" className="p-2 rounded-full hover:bg-[#181818]">
-          <UploadImage src="icons/logo.svg" alt="logo" w={24} h={24} />
+          <UploadImage src="/icons/logo.svg" alt="logo" w={24} h={24} />
         </Link>
         <div className="flex flex-col">
           {leftSideBar.map((item) => (
@@ -18,7 +18,7 @@ const LeftSidebar = () => {
               key={item.id}
             >
               <UploadImage
-                src={`icons/${item.icon}`}
+                src={`/icons/${item.icon}`}
                 alt={item.name}
                 w={24}
                 h={24}
@@ -31,7 +31,7 @@ const LeftSidebar = () => {
           href="/"
           className="bg-white text-black rounded-full font-bold size-12 flex items-center justify-center xxl:hidden "
         >
-          <UploadImage src="icons/post.svg" alt="post" w={24} h={24} />
+          <UploadImage src="/icons/post.svg" alt="post" w={24} h={24} />
         </Link>
         <Link
           href="/"
@@ -44,7 +44,7 @@ const LeftSidebar = () => {
         <div className="flex items-center gap-2 ">
           <div className=" size-10 relative rounded-full overflow-hidden">
             <UploadImage
-              src="general/avatar.png"
+              src="/general/avatar.png"
               alt="lama dev"
               w={100}
               h={100}

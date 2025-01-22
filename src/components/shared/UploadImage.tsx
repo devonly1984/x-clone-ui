@@ -11,12 +11,12 @@ interface Props {
   tr?:boolean;
 }
 const UploadImage = ({src,w,h,alt,className,tr}:Props) => {
-  console.log(src);
+
   return (
     <IKImage
       urlEndpoint={config.env.imagekit.urlEndpoint}
       publicKey={config.env.imagekit.ikpublicKey}
-      src={`/xui-clone/${src}`}
+      path={`/xui-clone/${src}`}
       alt={alt}
       className={className}
       {...(tr
