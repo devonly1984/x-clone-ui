@@ -16,7 +16,7 @@ const UploadImage = ({src,w,h,alt,className,tr}:Props) => {
     <IKImage
       urlEndpoint={config.env.imagekit.urlEndpoint}
       publicKey={config.env.imagekit.ikpublicKey}
-      path={`/xui-clone/${src}`}
+      path={src.includes("/xui-clone") ? src : `/xui-clone/${src}`}
       alt={alt}
       className={className}
       {...(tr

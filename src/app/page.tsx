@@ -9,12 +9,22 @@ const Homepage = () => {
       <div className="flex justify-between text-textGray font-bold border-b-[1px] border-borderGray pt-4 px-4">
         <Link
           href="/"
-          className="pb-flex items-center border-b-4 border-iconBlue"
+          className="pb-3 flex items-center border-b-4 border-iconBlue"
         >
           For You
         </Link>
 
-        <Link href="/" className="pb-flex items-center">
+        <Link href="/" className="pb-3 flex items-center">
+          Following
+        </Link>
+
+        <Link href="/" className="pb-3 md:flex hidden items-center">
+          Following
+        </Link>
+        <Link href="/" className="pb-3 md:flex hidden items-center">
+          Following
+        </Link>
+        <Link href="/" className="pb-3 md:flex hidden items-center">
           Following
         </Link>
       </div>
