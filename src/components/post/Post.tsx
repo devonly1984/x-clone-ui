@@ -3,6 +3,7 @@ import { imagekit_Server } from "@/lib/utils";
 import UploadImage from "../shared/UploadImage";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
+import UploadVideo from "../shared/UploadVideo";
 
 const Post = async() => {
   const getFileDetails = async (
@@ -16,7 +17,7 @@ const Post = async() => {
     });
   };
   const fileDetails = await getFileDetails('678f16c20869cdf6ea9c3c87')
-  console.log(fileDetails);
+
   return (
     <div className="p-4 border-borderGray border-y-[1px]">
       {/**Post Type */}
@@ -71,12 +72,17 @@ const Post = async() => {
             elit sint consectetur ut aliquip.
           </p>
           {/*<UploadImage src="general/post.jpeg" alt="" w={600} h={600} />*/}
-          {fileDetails && (
+          {fileDetails && fileDetails.fileType === "image" ? (
             <UploadImage
               src={fileDetails.filePath}
               alt=""
               w={fileDetails.width}
               h={fileDetails.height}
+              className={fileDetails.customMetaData?.sensitive ? "blur-lg" : ""}
+            />
+          ) : (
+            <UploadVideo
+              path={fileDetails.filePath}
               className={fileDetails.customMetaData?.sensitive ? "blur-lg" : ""}
             />
           )}

@@ -36,7 +36,7 @@ const Share = () => {
           className="bg-transparent outline-none placeholder:text-textGray text-lg"
           name="desc"
         />
-        {previewUrl && (
+        {media?.type.includes("image") && previewUrl && (
           <div className="rounded-xl overflow-hidden relative">
             <Image
               src={previewUrl}
@@ -50,6 +50,23 @@ const Share = () => {
               onClick={() => setIsEditorOpen(true)}
             >
               Edit
+            </div>
+            <div
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white size-8 flex items-center justify-center rounded-full cursor-pointer text-sm font-bold"
+              onClick={() => setMedia(null)}
+            >
+              X
+            </div>
+          </div>
+        )}
+        {media?.type.includes("video") && previewUrl && (
+          <div className="relative">
+            <video src={previewUrl} controls />
+            <div
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white size-8 flex items-center justify-center rounded-full cursor-pointer text-sm font-bold"
+              onClick={() => setMedia(null)}
+            >
+              X
             </div>
           </div>
         )}
