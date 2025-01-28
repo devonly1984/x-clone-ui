@@ -4,6 +4,7 @@ import UploadImage from "./UploadImage";
 import { shareAction } from "@/actions/upload.actions";
 import Image from 'next/image'
 import ImageEditor from "./ImageEditor";
+import IconBar from "./IconBar";
 
 const Share = () => {
   const [media, setMedia] = useState<File | null>(null);
@@ -99,41 +100,7 @@ const Share = () => {
                 className="cursor-pointer"
               />
             </label>
-            <UploadImage
-              src="icons/gif.svg"
-              alt=""
-              w={20}
-              h={20}
-              className="cursor-pointer"
-            />
-            <UploadImage
-              src="icons/poll.svg"
-              alt=""
-              w={20}
-              h={20}
-              className="cursor-pointer"
-            />
-            <UploadImage
-              src="icons/emoji.svg"
-              alt=""
-              w={20}
-              h={20}
-              className="cursor-pointer"
-            />
-            <UploadImage
-              src="icons/schedule.svg"
-              alt=""
-              w={20}
-              h={20}
-              className="cursor-pointer"
-            />
-            <UploadImage
-              src="icons/location.svg"
-              alt=""
-              w={20}
-              h={20}
-              className="cursor-pointer"
-            />
+            <IconBar />
           </div>
           <button className="bg-white text-black font-bold rounded-full py-2 px-4">
             Post

@@ -1,11 +1,11 @@
 
 import { imagekit_Server } from "@/lib/utils";
 import UploadImage from "../shared/UploadImage";
-import PostInfo from "./PostInfo";
-import PostInteractions from "./PostInteractions";
+import { PostInfo, PostInteractions } from "@/components/post";
 import UploadVideo from "../shared/UploadVideo";
+import Link from "next/link";
 
-const Post = async() => {
+const Post = async ({ type }: { type?: "status" | "comment" }) => {
   const getFileDetails = async (
     fileId: string
   ): Promise<FileDetailsResponse> => {
@@ -16,7 +16,7 @@ const Post = async() => {
       });
     });
   };
-  const fileDetails = await getFileDetails('678f16c20869cdf6ea9c3c87')
+  const fileDetails = await getFileDetails("678f16c20869cdf6ea9c3c87");
 
   return (
     <div className="p-4 border-borderGray border-y-[1px]">
@@ -36,9 +36,11 @@ const Post = async() => {
         <span>Lama dev reposted</span>
       </div>
       {/**Post Content */}
-      <div className="flex gap-4">
+      <div className={`flex gap-4 ${type === "status" && "flex-col"}`}>
         {/**Avatar */}
-        <div className="relative size-10 rounded-full overflow-hidden">
+        <div
+          className={`relative size-10 rounded-full overflow-hidden ${type === "status" && "hidden"}`}
+        >
           <UploadImage
             src="general/avatar.png"
             alt="avatar"
@@ -52,25 +54,50 @@ const Post = async() => {
 
         <div className="flex-1 flex flex-col gap-2">
           {/**Top */}
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="tex-md font-bold">Lama Dev</h1>
-              <span className="text-textGray">@lamadev</span>
-              <span className="text-textGray">X days ago</span>
-            </div>
+          <div className={`w-full flex justify-between`}>
+            <Link href={`/test`} className={`flex gap-4`}>
+              <div
+                className={`relative size-10 rounded-full overflow-hidden ${type === "status" && "hidden"}`}
+              >
+                <UploadImage
+                  src="general/avatar.png"
+                  alt="avatar"
+                  w={100}
+                  h={100}
+                  tr
+                />
+              </div>
+              <div
+                className={`flex items-center gap-2 flex-wrap ${type === "status" && "flex-col gap-0 !items-start"}`}
+              >
+                <h1 className="tex-md font-bold">Lama Dev</h1>
+                <span
+                  className={`text-textGray ${type === "status" && "text-sm"}`}
+                >
+                  @lamadev
+                </span>
+                {type !== "status" && (
+                  <span className="text-textGray">X days ago</span>
+                )}
+              </div>
+            </Link>
+
             <PostInfo />
           </div>
+
           {/**Text and media */}
-          <p>
-            Sunt laborum in nulla aute. Culpa sunt et magna voluptate quis
-            voluptate. Excepteur eu in eu ut sit mollit mollit aute. Do quis
-            irure ad consequat ut laborum aute voluptate reprehenderit commodo
-            non cillum exercitation nulla. Sunt qui magna Lorem adipisicing sit
-            voluptate dolore exercitation anim pariatur tempor irure ex. Magna
-            irure nostrud voluptate qui officia laboris occaecat esse
-            exercitation. Nostrud fugiat tempor esse sunt eiusmod reprehenderit
-            elit sint consectetur ut aliquip.
-          </p>
+          <Link href={`/text/status/123`}>
+            <p className={`${type === "status" && "text-lg"}`}>
+              Sunt laborum in nulla aute. Culpa sunt et magna voluptate quis
+              voluptate. Excepteur eu in eu ut sit mollit mollit aute. Do quis
+              irure ad consequat ut laborum aute voluptate reprehenderit commodo
+              non cillum exercitation nulla. Sunt qui magna Lorem adipisicing
+              sit voluptate dolore exercitation anim pariatur tempor irure ex.
+              Magna irure nostrud voluptate qui officia laboris occaecat esse
+              exercitation. Nostrud fugiat tempor esse sunt eiusmod
+              reprehenderit elit sint consectetur ut aliquip.
+            </p>
+          </Link>
           {/*<UploadImage src="general/post.jpeg" alt="" w={600} h={600} />*/}
           {fileDetails && fileDetails.fileType === "image" ? (
             <UploadImage
@@ -86,10 +113,11 @@ const Post = async() => {
               className={fileDetails.customMetaData?.sensitive ? "blur-lg" : ""}
             />
           )}
+          {type === "status" && <span className="text-textGray">Date</span>}
           <PostInteractions />
         </div>
       </div>
     </div>
   );
-}
+};
 export default Post
